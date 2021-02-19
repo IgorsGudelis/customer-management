@@ -1,0 +1,9 @@
+pre-commit:
+  parallel: true
+  commands:
+    linter-ts:
+      run: npm run lint
+    linter-scss:
+      run: npm run lint:scss
+    tests:
+      run: npm run test -- --watch false

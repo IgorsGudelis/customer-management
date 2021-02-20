@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LayoutModule } from './modules/layout/layout.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { AppComponent } from './app.component';
     NgxsLoggerPluginModule.forRoot({
       disabled: environment.production,
     }),
+    LayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

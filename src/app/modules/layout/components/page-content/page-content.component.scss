@@ -2,31 +2,29 @@
 @import "abstracts/mixins";
 
 :host {
-  flex-grow: 1;
   display: flex;
-  flex-direction: column;
-  //   max-width: $layout-max-width;
   width: 100%;
   min-height: 100%;
-  //   margin: 0 auto;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .page-content {
-  flex-grow: 1;
   display: flex;
-  flex-direction: column;
   max-width: $layout-max-width;
-  margin: 0 auto;
+  flex-direction: column;
+  flex-grow: 1;
   padding-top: $header-height-mobile;
-  padding-left: $layout-padding-left;
   padding-right: $layout-padding-right;
+  padding-left: $layout-padding-left;
+  margin: 0 auto;
 
   @include respond-to($medium) {
     padding-top: $header-height;
   }
 
   @include respond-to($large) {
-    padding-left: $layout-padding-left-desktop;
     padding-right: $layout-padding-left-desktop;
+    padding-left: $layout-padding-left-desktop;
   }
 }

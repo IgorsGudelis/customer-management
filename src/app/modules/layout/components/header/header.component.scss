@@ -1,0 +1,36 @@
+@import "abstracts/colors";
+@import "abstracts/vars";
+@import "abstracts/mixins";
+
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: $header-height-mobile;
+  padding: 24px 16px;
+  box-shadow: 0 4px 8px -4px $color-black-100-20;
+
+  @include respond-to($medium) {
+    height: $header-height;
+    padding: 20px 40px;
+  }
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  width: 120px;
+
+  @include respond-to($medium) {
+    width: 140px;
+  }
+
+  @include respond-to($large) {
+    width: 160px;
+  }
+}
+
+.header__logo-img {
+  max-width: 100%;
+  height: auto;
+}

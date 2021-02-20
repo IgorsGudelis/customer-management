@@ -1,6 +1,6 @@
 {
   "plugins": ["stylelint-prettier"],
-  "extends": ["stylelint-config-standard", "stylelint-config-idiomatic-order"],
+  "extends": ["stylelint-config-standard"],
   "rules": {
     "font-family-no-missing-generic-family-keyword": null,
     "no-empty-source": null,

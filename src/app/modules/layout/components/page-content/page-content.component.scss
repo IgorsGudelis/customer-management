@@ -11,6 +11,7 @@
 
 .page-content {
   display: flex;
+  width: 100%;
   max-width: $layout-max-width;
   flex-direction: column;
   flex-grow: 1;

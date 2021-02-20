@@ -4,9 +4,11 @@
 
 .header {
   display: flex;
-  align-items: center;
   width: 100%;
   height: $header-height-mobile;
+  align-items: center;
+  position: relative;
+  z-index: 2;
   padding: 24px 16px;
   box-shadow: 0 4px 8px -4px $color-black-100-20;
 
@@ -18,8 +20,8 @@
 
 .header__logo {
   display: flex;
-  align-items: center;
   width: 120px;
+  align-items: center;
 
   @include respond-to($medium) {
     width: 140px;

@@ -14,17 +14,6 @@
   max-width: $layout-max-width;
   flex-direction: column;
   flex-grow: 1;
-  padding-top: $header-height-mobile;
-  padding-right: $layout-padding-right;
-  padding-left: $layout-padding-left;
   margin: 0 auto;
-
-  @include respond-to($medium) {
-    padding-top: $header-height;
-  }
-
-  @include respond-to($large) {
-    padding-right: $layout-padding-left-desktop;
-    padding-left: $layout-padding-left-desktop;
-  }
+  padding: $layout-padding;
 }

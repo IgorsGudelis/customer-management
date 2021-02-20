@@ -1,0 +1,24 @@
+<mat-sidenav-container class="sidenav">
+  <mat-sidenav class="sidenav__menu" mode="side" opened>
+    <mat-nav-list class="">
+      <a
+        class="sidenav__menu-item"
+        mat-list-item
+        *ngFor="let item of sidenavItems; last as isLast"
+        routerLink="{{ item.link }}"
+        routerLinkActive="router-link-active"
+        [matTooltip]="item.title"
+      >
+        <mat-icon class="sidenav__menu-item-icon" mat-list-icon>{{
+          item.icon
+        }}</mat-icon>
+
+        <div class="sidenav__menu-item-divider" *ngIf="!isLast"></div>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="sidenav__content">
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

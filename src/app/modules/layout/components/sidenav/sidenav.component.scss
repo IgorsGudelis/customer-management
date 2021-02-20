@@ -1,0 +1,54 @@
+@import "abstracts/colors";
+@import "abstracts/vars";
+@import "abstracts/mixins";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.sidenav__menu {
+  width: $sidenav-width;
+  border-right: none;
+  box-shadow: 4px 0 8px -4px $color-black-100-20;
+}
+
+.sidenav__menu-item {
+  &.router-link-active {
+    background-color: $color-black-100-4;
+  }
+}
+
+.sidenav__menu-item-icon {
+  margin: 10px 0;
+}
+
+.sidenav__menu-item-divider {
+  width: 25px;
+  height: 1px;
+}
+
+.mat-list-item.router-link-active {
+  .mat-line,
+  .mat-list-icon {
+    font-weight: bold;
+  }
+}
+
+::ng-deep .mat-list-item-content {
+  justify-content: center;
+}
+
+.sidenav__content {
+  flex-grow: 1;
+}

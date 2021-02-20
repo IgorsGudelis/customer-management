@@ -13,8 +13,14 @@
   display: flex;
   width: 100%;
   max-width: $layout-max-width;
+  height: calc(100vh - #{$header-height-mobile});
   flex-direction: column;
   flex-grow: 1;
   margin: 0 auto;
-  padding: $layout-padding;
+  padding: $layout-padding-mobile;
+
+  @include respond-to($medium) {
+    height: calc(100vh - #{$header-height});
+    padding: $layout-padding;
+  }
 }

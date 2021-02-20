@@ -4,8 +4,9 @@ export interface CustomerModel {
   address: AddressModel;
   email: string;
   fullName: string;
-  location: {
+  coordinates: {
     lat: string;
     lng: string;
   };
+  avatar?: string;
 }

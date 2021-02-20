@@ -1,1 +1,25 @@
-<p>customers-list works!</p>
+<section class="customers">
+  <div class="customers__header">
+    <h1 class="customers__title mat-display-1">Customers</h1>
+    <button
+      class="customers__add-btn"
+      mat-mini-fab
+      color="primary"
+      matTooltip="add customer"
+    >
+      <mat-icon>plus_one</mat-icon>
+    </button>
+  </div>
+  <ng-container *ngIf="customers?.length > 0; else customersEmptyList">
+    <app-customer-card
+      *ngFor="let item of customers"
+      [customer]="item"
+      (delete)="onDeleteCustomer(item)"
+      (edit)="onEditCustomer(item)"
+    ></app-customer-card>
+  </ng-container>
+</section>
+
+<ng-template #customersEmptyList>
+  <p class="customers__empty-message">There doesn’t seem to be anything here</p>
+</ng-template>

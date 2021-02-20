@@ -1,0 +1,38 @@
+@import "abstracts/colors";
+
+:host {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-card {
+  flex-grow: 1;
+}
+
+.customer-card__subtitle {
+  word-break: break-all;
+}
+
+.customer-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.customer-card__adress-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.customer-card__adress-title {
+  width: 100%;
+}
+
+.customer-card__adress-value {
+  margin-left: 8px;
+  color: $color-black-100-60;
+  word-break: break-word;
+}

@@ -8,7 +8,7 @@ $breakpoints: (
       min-width: 320px,
     ),
   #{$medium}: (
-      min-width: 660px,
+      min-width: 768px,
     ),
   #{$large}: (
       min-width: 1200px,
@@ -21,7 +21,8 @@ $breakpoints: (
 $header-height: 90px;
 $header-height-mobile: 70px;
 $layout-max-width: 1440px;
-$layout-padding: 20px;
+$layout-padding-mobile: 20px;
+$layout-padding: 40px;
 $sidenav-width: 70px;
 
 $animation-function: cubic-bezier(0.25, 0.01, 0.25, 1);

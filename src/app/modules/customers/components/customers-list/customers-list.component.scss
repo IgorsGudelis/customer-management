@@ -1,0 +1,51 @@
+@import "abstracts/colors";
+@import "abstracts/vars";
+@import "abstracts/mixins";
+
+:host {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.customers {
+  flex-grow: 1;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(max-content, 1fr));
+
+  @include respond-to($small) {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
+
+  @include respond-to($medium) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  @include respond-to($large) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 40px;
+  }
+}
+
+.customers__header {
+  grid-column: 1 / -1;
+  align-self: start;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.customers__title {
+  margin: 0;
+}
+
+.customers__add-btn {
+  margin-left: 16px;
+}
+
+.customers__empty-message {
+  grid-column: 1 / -1;
+  text-align: center;
+}

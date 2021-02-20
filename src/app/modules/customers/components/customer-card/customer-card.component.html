@@ -1,0 +1,84 @@
+<mat-card class="customer-card" *ngIf="customer">
+  <mat-card-header>
+    <img
+      *ngIf="customer.avatar; else avatarDefault"
+      mat-card-avatar
+      [src]="customer.avatar"
+      alt="customer's avatar"
+    />
+    <mat-card-title>{{ customer.fullName }}</mat-card-title>
+    <mat-card-subtitle class="customer-card__subtitle">{{
+      customer.email
+    }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <ul class="customer-card__adress">
+      <li class="customer-card__adress-item">
+        <span class="mat-body-strong">City:</span>
+        <span class="customer-card__adress-value">{{
+          customer.address.city
+        }}</span>
+      </li>
+
+      <li class="customer-card__adress-item">
+        <span class="mat-body-strong">Street:</span>
+        <span class="customer-card__adress-value">{{
+          customer.address.street
+        }}</span>
+      </li>
+
+      <li class="customer-card__adress-item">
+        <span class="mat-body-strong">House number:</span>
+        <span class="customer-card__adress-value">
+          {{ customer.address.houseNumber }}</span
+        >
+      </li>
+
+      <li class="customer-card__adress-item">
+        <span class="mat-body-strong">Zip code:</span>
+        <span class="customer-card__adress-value">
+          {{ customer.address.houseNumber }}</span
+        >
+      </li>
+
+      <li class="customer-card__adress-item">
+        <p class="customer-card__adress-title mat-body-strong">Coordinates:</p>
+
+        <div>
+          <p>
+            latitude:
+            <span class="customer-card__adress-value">
+              {{ customer.coordinates.lat }}
+            </span>
+          </p>
+
+          <p>
+            longitude:
+            <span class="customer-card__adress-value">
+              {{ customer.coordinates.lng }}</span
+            >
+          </p>
+        </div>
+      </li>
+    </ul>
+  </mat-card-content>
+
+  <mat-card-actions class="customer-card__actions">
+    <button mat-icon-button matTooltip="edit" (click)="onEditCustomer()">
+      <mat-icon>mode</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="warn"
+      matTooltip="delete"
+      (click)="onDeleteCustomer()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<ng-template #avatarDefault>
+  <mat-icon mat-card-avatar>person</mat-icon>
+</ng-template>

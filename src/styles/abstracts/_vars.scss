@@ -1,0 +1,30 @@
+$small: "small";
+$medium: "medium";
+$large: "large";
+$xlarge: "xlarge";
+
+$breakpoints: (
+  #{$small}: (
+      min-width: 320px,
+    ),
+  #{$medium}: (
+      min-width: 660px,
+    ),
+  #{$large}: (
+      min-width: 1200px,
+    ),
+  #{$xlarge}: (
+      min-width: 1440px,
+    )
+);
+
+$header-height: 110px;
+$header-height-mobile: 70px;
+$layout-max-width: 1440px;
+$layout-padding-left: 20px;
+$layout-padding-right: 20px;
+$layout-padding-left-desktop: 130px;
+$layout-padding-right-desktop: 130px;
+
+$animation-function: cubic-bezier(0.25, 0.01, 0.25, 1);
+$transition-data: 0.2s $animation-function 0s;

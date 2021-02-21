@@ -40,7 +40,7 @@
       <li class="customer-card__adress-item">
         <span class="mat-body-strong">Zip code:</span>
         <span class="customer-card__adress-value">
-          {{ customer.address.houseNumber }}</span
+          {{ customer.address.zipCode }}</span
         >
       </li>
 
@@ -51,14 +51,14 @@
           <p>
             latitude:
             <span class="customer-card__adress-value">
-              {{ customer.coordinates?.lat }}
+              {{ customer.location?.lat }}
             </span>
           </p>
 
           <p>
             longitude:
             <span class="customer-card__adress-value">
-              {{ customer.coordinates?.lng }}</span
+              {{ customer.location?.lng }}</span
             >
           </p>
         </div>

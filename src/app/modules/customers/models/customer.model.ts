@@ -3,7 +3,7 @@ import { AddressModel } from '@shared/models/address.model';
 export interface CustomerModel {
   address: AddressModel;
   avatar?: string;
-  coordinates?: {
+  location?: {
     lat: string;
     lng: string;
   };

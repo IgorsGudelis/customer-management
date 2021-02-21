@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Inject,
   OnInit
@@ -8,8 +9,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Dispatch } from '@ngxs-labs/dispatch-decorator';
-import { Actions, ofActionErrored, ofActionSuccessful } from '@ngxs/store';
+import { Store } from '@ngxs/store';
+import {
+  GeocodingResponseStatus
+} from '@shared/enums/geocoding-response-status.enum';
 
 import { CustomerModel } from '../../models/customer.model';
 import { AddCustomer } from '../../state/customers.actions';
@@ -35,46 +38,48 @@ export class ManageCustomerDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ManageCustomerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CustomerModel,
-    private actions$: Actions,
+    private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
     this.createForm();
-    this.addSubmitSuccessfulHandler();
-    this.addSubmitErrorHandler();
   }
 
   onCancel(): void {
     this.dialogRef.close();
   }
 
-  @Dispatch() onSubmit(): AddCustomer {
+  onSubmit(): void {
     const customer = this.form.value;
 
     this.isSubmitting = true;
+    this.store
+      .dispatch(new AddCustomer(customer))
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        () => {
+          this.dialogRef.close();
+          this.snackBar.open('Customer has been successfully added!');
+        },
+        (error) => {
+          this.isSubmitting = false;
+          this.cdr.markForCheck();
 
-    return new AddCustomer(customer);
-  }
+          switch (error.message) {
+            case GeocodingResponseStatus.ZERO_RESULTS: {
+              this.snackBar.open('A non-existent address!');
+              break;
+            }
 
-  private addSubmitSuccessfulHandler(): void {
-    this.actions$
-      .pipe(ofActionSuccessful(AddCustomer), untilDestroyed(this))
-      .subscribe(() => {
-        this.isSubmitting = false;
-        this.dialogRef.close();
-        this.snackBar.open('Customer has been successfully added!');
-      });
-  }
-
-  private addSubmitErrorHandler(): void {
-    this.actions$
-      .pipe(ofActionErrored(AddCustomer), untilDestroyed(this))
-      .subscribe(() => {
-        this.isSubmitting = false;
-        this.snackBar.open('Something went wrong! Try again...');
-      });
+            default: {
+              this.snackBar.open('Something went wrong! Try again...');
+            }
+          }
+        }
+      );
   }
 
   private createForm(): void {

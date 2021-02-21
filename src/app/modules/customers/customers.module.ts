@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
@@ -15,6 +16,7 @@ import { CustomersState } from './state/customers.state';
   imports: [
     CommonModule,
     CustomersRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     NgxsModule.forFeature([CustomersState]),
     AppMaterialModule.forRoot(),

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Select } from '@ngxs/store';
+import { DIALOG_CONFIG } from '@shared/config/constants';
 import { Observable } from 'rxjs';
 
 import { CustomerModel } from '../../models/customer.model';
@@ -14,28 +15,23 @@ import {
   templateUrl: './customers-list.component.html',
   styleUrls: ['./customers-list.component.scss'],
 })
-export class CustomersListComponent implements OnInit {
+export class CustomersListComponent {
   @Select(CustomersSelectors.customersList) customersList$: Observable<
     CustomerModel[]
   >;
 
   constructor(public dialog: MatDialog) {}
 
-  ngOnInit(): void {}
-
   onAddCustomer(): void {
-    const dialogRef = this.dialog.open(ManageCustomerDialogComponent, {
-      width: '100%',
-      maxWidth: '600px',
-      data: { fullName: 'Bob' },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-    });
+    this.dialog.open(ManageCustomerDialogComponent, DIALOG_CONFIG);
   }
 
   onDeleteCustomer(customer: CustomerModel): void {}
 
-  onEditCustomer(customer: CustomerModel): void {}
+  onEditCustomer(customer: CustomerModel): void {
+    this.dialog.open(ManageCustomerDialogComponent, {
+      ...DIALOG_CONFIG,
+      data: customer,
+    });
+  }
 }

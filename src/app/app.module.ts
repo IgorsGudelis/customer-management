@@ -1,7 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxsDispatchPluginModule } from '@ngxs-labs/dispatch-decorator';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
@@ -18,12 +18,12 @@ import { LayoutModule } from './modules/layout/layout.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     NgxsModule.forRoot([], {
       developmentMode: !environment.production,
     }),
     NgxsStoragePluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
-    NgxsDispatchPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot({
       disabled: environment.production,
     }),

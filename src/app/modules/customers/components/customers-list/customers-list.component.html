@@ -17,7 +17,7 @@
       <app-customer-card
         *ngFor="let item of customersList"
         [customer]="item"
-        (delete)="onDeleteCustomer(item)"
+        (delete)="onDeleteCustomer(item.id)"
         (edit)="onEditCustomer(item)"
       ></app-customer-card>
     </ng-container>

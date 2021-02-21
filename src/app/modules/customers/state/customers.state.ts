@@ -9,7 +9,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 
-import { AddCustomer, EditCustomer } from './customers.actions';
+import { AddCustomer, DeleteCustomer, EditCustomer } from './customers.actions';
 import { CustomersStateModel, defaults } from './customers.state.model';
 
 @State<CustomersStateModel>({
@@ -36,6 +36,20 @@ export class CustomersState {
     };
 
     return this.getCustomerGeocoding(address, cb);
+  }
+
+  @Action(DeleteCustomer)
+  deleteCustomer(
+    ctx: StateContext<CustomersStateModel>,
+    action: DeleteCustomer
+  ): any {
+    const payload = action.payload;
+    const state = ctx.getState();
+    const customers = state.customersList.filter((item) => item.id !== payload);
+
+    ctx.patchState({
+      customersList: [...customers],
+    });
   }
 
   @Action(EditCustomer)

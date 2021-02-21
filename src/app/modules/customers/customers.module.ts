@@ -6,6 +6,7 @@ import { NgxsModule } from '@ngxs/store';
 import {
   AppMaterialModule
 } from '@shared/modules/app-material/app-material.module';
+import { SharedModule } from '@shared/shared.module';
 
 import { CUSTOMERS_COMPONENTS } from './components';
 import { CustomersRoutingModule } from './customers-routing.module';
@@ -20,6 +21,7 @@ import { CustomersState } from './state/customers.state';
     ReactiveFormsModule,
     NgxsModule.forFeature([CustomersState]),
     AppMaterialModule.forRoot(),
+    SharedModule,
   ],
 })
 export class CustomersModule {}

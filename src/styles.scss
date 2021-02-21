@@ -4,6 +4,8 @@
 @import "./styles/abstracts/vars";
 @import "./styles/abstracts/scaffolding";
 
+@import "./styles/overrides/dialog";
+
 $app-typography: mat-typography-config(
   $subheading-1: mat-typography-level(16px, 28px, 400),
   $body-1: mat-typography-level(16px, 20px, 400),

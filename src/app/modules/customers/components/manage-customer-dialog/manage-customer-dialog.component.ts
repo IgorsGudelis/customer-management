@@ -5,7 +5,7 @@ import {
   Inject,
   OnInit
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -13,9 +13,10 @@ import { Store } from '@ngxs/store';
 import {
   GeocodingResponseStatus
 } from '@shared/enums/geocoding-response-status.enum';
+import { InputHelper } from '@shared/helpers/trim-ctrls-value.helper';
 
 import { CustomerModel } from '../../models/customer.model';
-import { AddCustomer } from '../../state/customers.actions';
+import { AddCustomer, EditCustomer } from '../../state/customers.actions';
 
 @UntilDestroy()
 @Component({
@@ -53,16 +54,28 @@ export class ManageCustomerDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const customer = this.form.value;
+    InputHelper.trimCtrlsValue(this.form);
+
+    if (this.form.invalid || this.isSubmitting) {
+      this.form.markAllAsTouched();
+
+      return;
+    }
+
+    const customer = { ...this.form.value, id: this.data?.id };
+    const action = this.data ? EditCustomer : AddCustomer;
+    const successfulMessage = `The customer has been successfully ${
+      this.data ? 'modified' : 'added'
+    }!`;
 
     this.isSubmitting = true;
     this.store
-      .dispatch(new AddCustomer(customer))
+      .dispatch(new action(customer))
       .pipe(untilDestroyed(this))
       .subscribe(
         () => {
           this.dialogRef.close();
-          this.snackBar.open('Customer has been successfully added!');
+          this.snackBar.open(successfulMessage);
         },
         (error) => {
           this.isSubmitting = false;
@@ -83,14 +96,22 @@ export class ManageCustomerDialogComponent implements OnInit {
   }
 
   private createForm(): void {
+    const address = this.data?.address;
+
     this.form = this.fb.group({
-      [this.FULLNAME_CTRL_NAME]: [],
-      [this.EMAIL_CTRL_NAME]: [],
+      [this.FULLNAME_CTRL_NAME]: [this.data?.fullName, [Validators.required]],
+      [this.EMAIL_CTRL_NAME]: [
+        this.data?.email,
+        [Validators.required, Validators.email],
+      ],
       [this.ADDRESS_FORM_NAME]: this.fb.group({
-        [this.CITY_CTRL_NAME]: [],
-        [this.HOUSE_NUMBER_CTRL_NAME]: [],
-        [this.STREET_CTRL_NAME]: [],
-        [this.ZIP_CODE_CTRL_NAME]: [],
+        [this.CITY_CTRL_NAME]: [address?.city, [Validators.required]],
+        [this.HOUSE_NUMBER_CTRL_NAME]: [
+          address?.houseNumber,
+          [Validators.required],
+        ],
+        [this.STREET_CTRL_NAME]: [address?.street, [Validators.required]],
+        [this.ZIP_CODE_CTRL_NAME]: [address?.zipCode, [Validators.required]],
       }),
     });
   }

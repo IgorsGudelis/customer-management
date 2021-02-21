@@ -1,5 +1,5 @@
 <div class="manage-customer">
-  <h1 mat-dialog-title>Add Customer</h1>
+  <h1 mat-dialog-title>{{ data ? "Edit" : "Add" }} Customer</h1>
 
   <div mat-dialog-content>
     <mat-progress-bar
@@ -10,33 +10,33 @@
 
     <form class="manage-customer__form" [formGroup]="form">
       <mat-form-field class="manage-customer__ctrl">
-        <mat-label>Full name</mat-label>
+        <mat-label>Full name*</mat-label>
         <input matInput [formControlName]="FULLNAME_CTRL_NAME" />
       </mat-form-field>
 
       <mat-form-field class="manage-customer__ctrl">
-        <mat-label>Email</mat-label>
+        <mat-label>Email*</mat-label>
         <input matInput [formControlName]="EMAIL_CTRL_NAME" />
       </mat-form-field>
 
       <div [formGroupName]="ADDRESS_FORM_NAME">
         <mat-form-field class="manage-customer__ctrl">
-          <mat-label>City</mat-label>
+          <mat-label>City*</mat-label>
           <input matInput [formControlName]="CITY_CTRL_NAME" />
         </mat-form-field>
 
         <mat-form-field class="manage-customer__ctrl">
-          <mat-label>House number</mat-label>
+          <mat-label>House number*</mat-label>
           <input matInput [formControlName]="HOUSE_NUMBER_CTRL_NAME" />
         </mat-form-field>
 
         <mat-form-field class="manage-customer__ctrl">
-          <mat-label>Street</mat-label>
+          <mat-label>Street*</mat-label>
           <input matInput [formControlName]="STREET_CTRL_NAME" />
         </mat-form-field>
 
         <mat-form-field class="manage-customer__ctrl">
-          <mat-label>Zip code</mat-label>
+          <mat-label>Zip code*</mat-label>
           <input matInput [formControlName]="ZIP_CODE_CTRL_NAME" />
         </mat-form-field>
       </div>
@@ -51,7 +51,7 @@
       color="primary"
       (click)="onSubmit()"
     >
-      Add
+      {{ data ? "Edit" : "Add" }}
     </button>
   </div>
 </div>

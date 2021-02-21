@@ -6,13 +6,15 @@
       [src]="customer.avatar"
       alt="customer's avatar"
     />
-    <mat-card-title>{{ customer.fullName }}</mat-card-title>
+    <mat-card-title class="customer-card__title">{{
+      customer.fullName
+    }}</mat-card-title>
     <mat-card-subtitle class="customer-card__subtitle">{{
       customer.email
     }}</mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content>
+  <mat-card-content class="customer-card__content">
     <ul class="customer-card__adress">
       <li class="customer-card__adress-item">
         <span class="mat-body-strong">City:</span>
@@ -49,14 +51,14 @@
           <p>
             latitude:
             <span class="customer-card__adress-value">
-              {{ customer.coordinates.lat }}
+              {{ customer.coordinates?.lat }}
             </span>
           </p>
 
           <p>
             longitude:
             <span class="customer-card__adress-value">
-              {{ customer.coordinates.lng }}</span
+              {{ customer.coordinates?.lng }}</span
             >
           </p>
         </div>

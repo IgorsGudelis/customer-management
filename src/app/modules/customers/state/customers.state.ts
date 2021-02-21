@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { State } from '@ngxs/store';
+import { Action, State, StateContext } from '@ngxs/store';
 
+import { AddCustomer } from './customers.actions';
 import { CustomersStateModel, defaults } from './customers.state.model';
 
 @State<CustomersStateModel>({
@@ -8,4 +9,20 @@ import { CustomersStateModel, defaults } from './customers.state.model';
   defaults,
 })
 @Injectable()
-export class CustomersState {}
+export class CustomersState {
+  @Action(AddCustomer)
+  addCustomer(
+    ctx: StateContext<CustomersStateModel>,
+    action: AddCustomer
+  ): void {
+    try {
+      const state = ctx.getState();
+
+      ctx.patchState({
+        customersList: [...state.customersList, action.payload],
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}

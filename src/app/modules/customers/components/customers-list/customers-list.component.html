@@ -6,18 +6,22 @@
       mat-mini-fab
       color="primary"
       matTooltip="add customer"
+      (click)="onAddCustomer()"
     >
       <mat-icon>plus_one</mat-icon>
     </button>
   </div>
-  <ng-container *ngIf="customers?.length > 0; else customersEmptyList">
-    <app-customer-card
-      *ngFor="let item of customers"
-      [customer]="item"
-      (delete)="onDeleteCustomer(item)"
-      (edit)="onEditCustomer(item)"
-    ></app-customer-card>
-  </ng-container>
+
+  <div class="customers__list" *ngIf="customersList$ | async as customersList">
+    <ng-container *ngIf="customersList.length > 0; else customersEmptyList">
+      <app-customer-card
+        *ngFor="let item of customersList"
+        [customer]="item"
+        (delete)="onDeleteCustomer(item)"
+        (edit)="onEditCustomer(item)"
+      ></app-customer-card>
+    </ng-container>
+  </div>
 </section>
 
 <ng-template #customersEmptyList>

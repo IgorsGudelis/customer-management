@@ -1,0 +1,57 @@
+<div class="manage-customer">
+  <h1 mat-dialog-title>Add Customer</h1>
+
+  <div mat-dialog-content>
+    <mat-progress-bar
+      class="manage-customer__progress-bar"
+      [mode]="isSubmitting ? 'indeterminate' : 'determinate'"
+      value="100"
+    ></mat-progress-bar>
+
+    <form class="manage-customer__form" [formGroup]="form">
+      <mat-form-field class="manage-customer__ctrl">
+        <mat-label>Full name</mat-label>
+        <input matInput [formControlName]="FULLNAME_CTRL_NAME" />
+      </mat-form-field>
+
+      <mat-form-field class="manage-customer__ctrl">
+        <mat-label>Email</mat-label>
+        <input matInput [formControlName]="EMAIL_CTRL_NAME" />
+      </mat-form-field>
+
+      <div [formGroupName]="ADDRESS_FORM_NAME">
+        <mat-form-field class="manage-customer__ctrl">
+          <mat-label>City</mat-label>
+          <input matInput [formControlName]="CITY_CTRL_NAME" />
+        </mat-form-field>
+
+        <mat-form-field class="manage-customer__ctrl">
+          <mat-label>House number</mat-label>
+          <input matInput [formControlName]="HOUSE_NUMBER_CTRL_NAME" />
+        </mat-form-field>
+
+        <mat-form-field class="manage-customer__ctrl">
+          <mat-label>Street</mat-label>
+          <input matInput [formControlName]="STREET_CTRL_NAME" />
+        </mat-form-field>
+
+        <mat-form-field class="manage-customer__ctrl">
+          <mat-label>Zip code</mat-label>
+          <input matInput [formControlName]="ZIP_CODE_CTRL_NAME" />
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button
+      mat-button
+      cdkFocusInitial
+      [disabled]="isSubmitting"
+      (click)="onSubmit()"
+    >
+      Add
+    </button>
+  </div>
+</div>

@@ -2,20 +2,20 @@
 @import "abstracts/mixins";
 
 :host {
+  flex-grow: 1;
   display: flex;
+  flex-direction: column;
   width: 100%;
   min-height: 100%;
-  flex-direction: column;
-  flex-grow: 1;
 }
 
 .page-content {
+  flex-grow: 1;
   display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: $layout-max-width;
   height: calc(100vh - #{$header-height-mobile});
-  flex-direction: column;
-  flex-grow: 1;
   margin: 0 auto;
   padding: $layout-padding-mobile;
 

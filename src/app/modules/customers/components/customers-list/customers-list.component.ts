@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 import { CustomerModel } from '../../models/customer.model';
+import { CustomersSelectors } from '../../state/customers.selectors';
+import {
+  ManageCustomerDialogComponent
+} from '../manage-customer-dialog/manage-customer-dialog.component';
 
 @Component({
   selector: 'app-customers-list',
@@ -8,27 +15,25 @@ import { CustomerModel } from '../../models/customer.model';
   styleUrls: ['./customers-list.component.scss'],
 })
 export class CustomersListComponent implements OnInit {
-  customers: CustomerModel[] = Array(9).fill({
-    address: {
-      city: 'Minsk',
-      houseNumber: '12',
-      street: 'Lozinskayay',
-      zipCode: '123',
-    },
-    fullName: 'Bob',
-    email: 'bob@gmail.com',
-    coordinates: {
-      lat: '1212',
-      lng: '23232',
-    },
-  });
-  // customers = [];
+  @Select(CustomersSelectors.customersList) customersList$: Observable<
+    CustomerModel[]
+  >;
 
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
-  onAddCustomer(): void {}
+  onAddCustomer(): void {
+    const dialogRef = this.dialog.open(ManageCustomerDialogComponent, {
+      width: '100%',
+      maxWidth: '600px',
+      data: { fullName: 'Bob' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    });
+  }
 
   onDeleteCustomer(customer: CustomerModel): void {}
 

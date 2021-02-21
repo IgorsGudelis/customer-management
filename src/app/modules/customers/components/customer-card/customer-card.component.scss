@@ -8,10 +8,14 @@
 
 .customer-card {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.customer-card__subtitle {
-  word-break: break-all;
+.customer-card__title,
+.customer-card__subtitle,
+.customer-card__adress-value {
+  word-break: break-word;
 }
 
 .customer-card__actions {
@@ -31,8 +35,14 @@
   width: 100%;
 }
 
+.customer-card__content {
+  margin-top: auto;
+}
+
+.customer-card__title {
+  margin-right: 8px;
+}
+
 .customer-card__adress-value {
-  margin-left: 8px;
   color: $color-black-100-60;
-  word-break: break-word;
 }

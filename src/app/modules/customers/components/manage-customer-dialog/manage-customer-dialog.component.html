@@ -19,27 +19,7 @@
         <input matInput [formControlName]="EMAIL_CTRL_NAME" />
       </mat-form-field>
 
-      <div [formGroupName]="ADDRESS_FORM_NAME">
-        <mat-form-field class="manage-customer__ctrl">
-          <mat-label>City*</mat-label>
-          <input matInput [formControlName]="CITY_CTRL_NAME" />
-        </mat-form-field>
-
-        <mat-form-field class="manage-customer__ctrl">
-          <mat-label>House number*</mat-label>
-          <input matInput [formControlName]="HOUSE_NUMBER_CTRL_NAME" />
-        </mat-form-field>
-
-        <mat-form-field class="manage-customer__ctrl">
-          <mat-label>Street*</mat-label>
-          <input matInput [formControlName]="STREET_CTRL_NAME" />
-        </mat-form-field>
-
-        <mat-form-field class="manage-customer__ctrl">
-          <mat-label>Zip code*</mat-label>
-          <input matInput [formControlName]="ZIP_CODE_CTRL_NAME" />
-        </mat-form-field>
-      </div>
+      <app-address-form [address]="address"></app-address-form>
     </form>
   </div>
 

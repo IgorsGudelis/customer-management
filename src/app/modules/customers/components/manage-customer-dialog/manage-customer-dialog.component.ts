@@ -14,6 +14,7 @@ import {
   GeocodingResponseStatus
 } from '@shared/enums/geocoding-response-status.enum';
 import { InputHelper } from '@shared/helpers/trim-ctrls-value.helper';
+import { AddressModel } from '@shared/models/address.model';
 
 import { CustomerModel } from '../../models/customer.model';
 import { AddCustomer, EditCustomer } from '../../state/customers.actions';
@@ -28,13 +29,12 @@ import { AddCustomer, EditCustomer } from '../../state/customers.actions';
 export class ManageCustomerDialogComponent implements OnInit {
   readonly FULLNAME_CTRL_NAME = 'fullName';
   readonly EMAIL_CTRL_NAME = 'email';
-  readonly ADDRESS_FORM_NAME = 'address';
-  readonly CITY_CTRL_NAME = 'city';
-  readonly HOUSE_NUMBER_CTRL_NAME = 'houseNumber';
-  readonly STREET_CTRL_NAME = 'street';
-  readonly ZIP_CODE_CTRL_NAME = 'zipCode';
   form: FormGroup;
   isSubmitting = false;
+
+  get address(): AddressModel {
+    return this.data?.address;
+  }
 
   constructor(
     public dialogRef: MatDialogRef<ManageCustomerDialogComponent>,
@@ -96,23 +96,12 @@ export class ManageCustomerDialogComponent implements OnInit {
   }
 
   private createForm(): void {
-    const address = this.data?.address;
-
     this.form = this.fb.group({
       [this.FULLNAME_CTRL_NAME]: [this.data?.fullName, [Validators.required]],
       [this.EMAIL_CTRL_NAME]: [
         this.data?.email,
         [Validators.required, Validators.email],
       ],
-      [this.ADDRESS_FORM_NAME]: this.fb.group({
-        [this.CITY_CTRL_NAME]: [address?.city, [Validators.required]],
-        [this.HOUSE_NUMBER_CTRL_NAME]: [
-          address?.houseNumber,
-          [Validators.required],
-        ],
-        [this.STREET_CTRL_NAME]: [address?.street, [Validators.required]],
-        [this.ZIP_CODE_CTRL_NAME]: [address?.zipCode, [Validators.required]],
-      }),
     });
   }
 }

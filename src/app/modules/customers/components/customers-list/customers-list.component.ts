@@ -58,6 +58,7 @@ export class CustomersListComponent implements OnDestroy {
         switchMap(() => this.store.dispatch(new DeleteCustomer(id)))
       )
       .subscribe(() => {
+        this.confirmDialogSubscription.unsubscribe();
         this.snackBar.open('The customer has been successfully removed!');
       });
   }
